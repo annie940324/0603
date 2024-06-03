@@ -4,7 +4,9 @@ MoveNet is developed by TensorFlow:
 https://www.tensorflow.org/hub/tutorials/movenet
 
 */
-
+function preload(){	
+	carImg= loadImage("upload_7dd6374659c38a191c0e3eb86f1d75c5.gif")	
+}
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
 
