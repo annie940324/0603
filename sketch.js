@@ -1,4 +1,4 @@
-// /* MoveNet Skeleton - Steve's Makerspace (most of this code is from TensorFlow)
+/* MoveNet Skeleton - Steve's Makerspace (most of this code is from TensorFlow)
 
 MoveNet is developed by TensorFlow:
 https://www.tensorflow.org/hub/tutorials/movenet
@@ -124,4 +124,3 @@ function drawSkeleton() {
   15 left foot
   16 right foot
 */
-
