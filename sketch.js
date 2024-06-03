@@ -26,6 +26,11 @@ async function videoReady() {
   await getPoses();
 }
 
+async function preload() {
+  // Load your object images
+  leftObjectImg = loadImage('upload_7dd6374659c38a191c0e3eb86f1d75c5.jpg');
+  rightObjectImg = loadImage('upload_7dd6374659c38a191c0e3eb86f1d75c5.jpg');
+}
 async function getPoses() {
   if (detector) {
     poses = await detector.estimatePoses(video.elt, {
