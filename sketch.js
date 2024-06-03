@@ -4,8 +4,9 @@ MoveNet is developed by TensorFlow:
 https://www.tensorflow.org/hub/tutorials/movenet
 
 */
-function preload(){  //
-carImg= loadImage("upload_7dd6374659c38a191c0e3eb86f1d75c5.gif")
+
+function preload(){ 
+  carImg= loadImage("upload_fc4425b4ca387e988f6909176caae0ca.gif")  
 }
 
 let video, bodypose, pose, keypoint, detector;
@@ -58,7 +59,7 @@ function draw() {
   translate(cam.width, 0);
   scale(-1, 1);
   image(cam, 0, 0);
- 
+  
 }
 
 function drawSkeleton() {
@@ -73,10 +74,10 @@ function drawSkeleton() {
       push()
         textSize(40)
         scale(-1,1)
-        text("412730763,陳玟伶",partA.x-width,partA.y-150)  //我的名字
+        text("412730201,陳妍希",partA.x-width,partA.y-150)
       pop()
     }
-   
+    
     for (j = 5; j < 9; j++) {
       if (pose.keypoints[j].score > 0.1 && pose.keypoints[j + 2].score > 0.1) {
         partA = pose.keypoints[j];
@@ -93,28 +94,28 @@ function drawSkeleton() {
       image(carImg,partA.x-75, partA.y-75,150,150)  //左邊肩膀
       image(carImg,partB.x-75, partB.y-75,150,150)  //右邊肩膀
     pop()
-     
-     
+      
+      
     }
     // hip to hip
     partA = pose.keypoints[11];
     partB = pose.keypoints[12];
     if (partA.score > 0.1 && partB.score > 0.1) {
       line(partA.x, partA.y, partB.x, partB.y);
-     
+      
     }
     // shoulders to hips
     partA = pose.keypoints[5];
     partB = pose.keypoints[11];
     if (partA.score > 0.1 && partB.score > 0.1) {
       line(partA.x, partA.y, partB.x, partB.y);
-     
+      
     }
     partA = pose.keypoints[6];
     partB = pose.keypoints[12];
     if (partA.score > 0.1 && partB.score > 0.1) {
       line(partA.x, partA.y, partB.x, partB.y);
-     
+      
     }
     // hip to foot
     for (j = 11; j < 15; j++) {
@@ -122,7 +123,7 @@ function drawSkeleton() {
         partA = pose.keypoints[j];
         partB = pose.keypoints[j + 2];
         line(partA.x, partA.y, partB.x, partB.y);
-       
+        
       }
     }
   }
@@ -147,3 +148,4 @@ function drawSkeleton() {
   15 left foot
   16 right foot
 */
+
