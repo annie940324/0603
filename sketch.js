@@ -7,7 +7,10 @@ https://www.tensorflow.org/hub/tutorials/movenet
 
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
-
+let studentInfo = {
+  name: "陳玟伶",
+  studentID: "412730763"
+};
 async function init() {
   const detectorConfig = {
     modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
