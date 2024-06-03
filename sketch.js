@@ -53,6 +53,7 @@ function draw() {
   translate(cam.width, 0);
   scale(-1, 1);
   image(cam, 0, 0);
+   text("412730763 陳玟伶")
 }
 
 function drawSkeleton() {
