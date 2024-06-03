@@ -6,7 +6,7 @@ https://www.tensorflow.org/hub/tutorials/movenet
 */
 
 function preload(){ 
-  carImg= loadImage("upload_fc4425b4ca387e988f6909176caae0ca.gif")  
+  carImg= loadImage("upload_7dd6374659c38a191c0e3eb86f1d75c5.gif")  
 }
 
 let video, bodypose, pose, keypoint, detector;
@@ -74,7 +74,7 @@ function drawSkeleton() {
       push()
         textSize(40)
         scale(-1,1)
-        text("412730201,陳妍希",partA.x-width,partA.y-150)
+        text("412730763,陳玟伶",partA.x-width,partA.y-150)
       pop()
     }
     
