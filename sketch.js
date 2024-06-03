@@ -7,10 +7,7 @@ https://www.tensorflow.org/hub/tutorials/movenet
 
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
-let studentInfo = {
-  name: "陳玟伶",
-  studentID: "412730763"
-};
+
 async function init() {
   const detectorConfig = {
     modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
@@ -26,11 +23,7 @@ async function videoReady() {
   await getPoses();
 }
 
-async function preload() {
-  // Load your object images
-  leftObjectImg = loadImage('upload_7dd6374659c38a191c0e3eb86f1d75c5.jpg');
-  rightObjectImg = loadImage('upload_7dd6374659c38a191c0e3eb86f1d75c5.jpg');
-}
+
 async function getPoses() {
   if (detector) {
     poses = await detector.estimatePoses(video.elt, {
