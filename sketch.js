@@ -50,8 +50,8 @@ async function setup() {
   stroke(255);
   strokeWeight(5);
 
-  leftImgX = 0; // Start the left image off-canvas to the left
-  rightImgX = 0; // Start the right image off-canvas to the left
+  leftImgX = width; // Start the left image off-canvas to the right
+  rightImgX = width; // Start the right image off-canvas to the right
 }
 
 function draw() {
@@ -63,14 +63,14 @@ function draw() {
   scale(-1, 1);
   image(cam, 0, 0);
   
-  // Move images from left to right
-  leftImgX += imgSpeed;
-  rightImgX += imgSpeed;
-  if (leftImgX > width) {
-    leftImgX = -carImg.width; // Reset the left image position once it moves off-canvas
+  // Move images from right to left
+  leftImgX -= imgSpeed;
+  rightImgX -= imgSpeed;
+  if (leftImgX < -carImg.width) {
+    leftImgX = width; // Reset the left image position once it moves off-canvas
   }
-  if (rightImgX > width) {
-    rightImgX = -carImg.width; // Reset the right image position once it moves off-canvas
+  if (rightImgX < -carImg.width) {
+    rightImgX = width; // Reset the right image position once it moves off-canvas
   }
   
   // Draw images at the new positions
@@ -167,7 +167,7 @@ function drawSkeleton() {
   10 right wrist
   11 left hip
   12 right hip
-  13 left kneee
+  13 left knee
   14 right knee
   15 left foot
   16 right foot
