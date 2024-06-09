@@ -11,7 +11,6 @@ function preload() {
 
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
-let imgX; // X coordinate for image positions
 let imgSpeed = 2; // Speed of image movement
 
 async function init() {
@@ -48,8 +47,6 @@ async function setup() {
 
   stroke(255);
   strokeWeight(5);
-
-  imgX = width; // Start the image off-canvas to the right
 }
 
 function draw() {
@@ -60,12 +57,6 @@ function draw() {
   translate(cam.width, 0);
   scale(-1, 1);
   image(cam, 0, 0);
-  
-  // Move image from right to left
-  imgX -= imgSpeed;
-  if (imgX < -carImg.width) {
-    imgX = width; // Reset the image position once it moves off-canvas
-  }
 }
 
 function drawSkeleton() {
@@ -76,14 +67,14 @@ function drawSkeleton() {
 
     partA = pose.keypoints[0];
 
-    if(partA.score > 0.1){
-      push()
-        textSize(40)
-        scale(-1,1)
-        text("412730763,陳玟伶",partA.x-width,partA.y-150)
-      pop()
+    if (partA.score > 0.1) {
+      push();
+      textSize(40);
+      scale(-1, 1);
+      text("412730763,陳玟伶", partA.x - width, partA.y - 150);
+      pop();
     }
-    
+
     for (let j = 5; j < 9; j++) {
       if (pose.keypoints[j].score > 0.1 && pose.keypoints[j + 2].score > 0.1) {
         partA = pose.keypoints[j];
@@ -95,11 +86,19 @@ function drawSkeleton() {
     partA = pose.keypoints[5];
     partB = pose.keypoints[6];
     if (partA.score > 0.1 && partB.score > 0.1) {
-        //line(partA.x, partA.y, partB.x, partB.y);
-      push()
-        image(carImg, imgX - 75, partA.y - 75, 150, 150)  // 左边肩膀
-        image(carImg, imgX - 75, partB.y - 75, 150, 150)  // 右边肩膀
-      pop()
+      // Move image from right to left
+      partA.x -= imgSpeed;
+      partB.x -= imgSpeed;
+      if (partA.x < -75) {
+        partA.x = width;
+      }
+      if (partB.x < -75) {
+        partB.x = width;
+      }
+      push();
+      image(carImg, partA.x - 75, partA.y - 75, 150, 150); // 左邊肩膀
+      image(carImg, partB.x - 75, partB.y - 75, 150, 150); // 右邊肩膀
+      pop();
     }
     // hip to hip
     partA = pose.keypoints[11];
@@ -148,3 +147,4 @@ function drawSkeleton() {
   15 left foot
   16 right foot
 */
+
