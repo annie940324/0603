@@ -11,8 +11,7 @@ function preload() {
 
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
-let leftElbowX, leftElbowY, rightElbowX, rightElbowY; // Positions of elbows
-let leftImgX, rightImgX; // X coordinates for image positions
+let imgX; // X coordinate for image positions
 let imgSpeed = 2; // Speed of image movement
 
 async function init() {
@@ -50,8 +49,7 @@ async function setup() {
   stroke(255);
   strokeWeight(5);
 
-  leftImgX = width; // Start the left image off-canvas to the right
-  rightImgX = width; // Start the right image off-canvas to the right
+  imgX = width; // Start the image off-canvas to the right
 }
 
 function draw() {
@@ -63,22 +61,10 @@ function draw() {
   scale(-1, 1);
   image(cam, 0, 0);
   
-  // Move images from right to left
-  leftImgX -= imgSpeed;
-  rightImgX -= imgSpeed;
-  if (leftImgX < -carImg.width) {
-    leftImgX = width; // Reset the left image position once it moves off-canvas
-  }
-  if (rightImgX < -carImg.width) {
-    rightImgX = width; // Reset the right image position once it moves off-canvas
-  }
-  
-  // Draw images at the new positions
-  if (leftElbowX && leftElbowY) {
-    image(carImg, leftImgX, leftElbowY - carImg.height / 2); // Draw the image at the left elbow position
-  }
-  if (rightElbowX && rightElbowY) {
-    image(carImg, rightImgX, rightElbowY - carImg.height / 2); // Draw the image at the right elbow position
+  // Move image from right to left
+  imgX -= imgSpeed;
+  if (imgX < -carImg.width) {
+    imgX = width; // Reset the image position once it moves off-canvas
   }
 }
 
@@ -110,10 +96,10 @@ function drawSkeleton() {
     partB = pose.keypoints[6];
     if (partA.score > 0.1 && partB.score > 0.1) {
         //line(partA.x, partA.y, partB.x, partB.y);
-    push()
-      image(carImg,partA.x-75, partA.y-75,150,150)  //左邊肩膀
-      image(carImg,partB.x-75, partB.y-75,150,150)  //右邊肩膀
-    pop()
+      push()
+        image(carImg, imgX - 75, partA.y - 75, 150, 150)  // 左边肩膀
+        image(carImg, imgX - 75, partB.y - 75, 150, 150)  // 右边肩膀
+      pop()
     }
     // hip to hip
     partA = pose.keypoints[11];
@@ -139,16 +125,6 @@ function drawSkeleton() {
         partB = pose.keypoints[j + 2];
         line(partA.x, partA.y, partB.x, partB.y);
       }
-    }
-    
-    // Capture left and right elbow positions
-    if (pose.keypoints[7].score > 0.1) {
-      leftElbowX = pose.keypoints[7].x;
-      leftElbowY = pose.keypoints[7].y;
-    }
-    if (pose.keypoints[8].score > 0.1) {
-      rightElbowX = pose.keypoints[8].x;
-      rightElbowY = pose.keypoints[8].y;
     }
   }
 }
