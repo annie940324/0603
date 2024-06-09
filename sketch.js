@@ -11,7 +11,6 @@ function preload() {
 
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
-let imgX; // X coordinate for image positions
 let imgSpeed = 2; // Speed of image movement
 
 async function init() {
@@ -48,8 +47,6 @@ async function setup() {
 
   stroke(255);
   strokeWeight(5);
-
-  imgX = width; // Start the image off-canvas to the right
 }
 
 function draw() {
@@ -89,7 +86,7 @@ function drawSkeleton() {
     partA = pose.keypoints[5];
     partB = pose.keypoints[6];
     if (partA.score > 0.1 && partB.score > 0.1) {
-      // Move images from right to left
+      // Move image from right to left
       partA.x -= imgSpeed;
       partB.x -= imgSpeed;
       if (partA.x < -75) {
