@@ -12,6 +12,7 @@ function preload() {
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
 let imgSpeed = 2; // Speed of image movement
+let imgXLeft, imgXRight; // X positions for the images
 
 async function init() {
   const detectorConfig = {
@@ -47,6 +48,9 @@ async function setup() {
 
   stroke(255);
   strokeWeight(5);
+
+  imgXLeft = width; // Initialize image position off the canvas on the right
+  imgXRight = width; // Initialize image position off the canvas on the right
 }
 
 function draw() {
@@ -87,17 +91,17 @@ function drawSkeleton() {
     partB = pose.keypoints[6];
     if (partA.score > 0.1 && partB.score > 0.1) {
       // Move image from right to left
-      partA.x -= imgSpeed;
-      partB.x -= imgSpeed;
-      if (partA.x < -75) {
-        partA.x = width;
+      imgXLeft -= imgSpeed;
+      imgXRight -= imgSpeed;
+      if (imgXLeft < -75) {
+        imgXLeft = width;
       }
-      if (partB.x < -75) {
-        partB.x = width;
+      if (imgXRight < -75) {
+        imgXRight = width;
       }
       push();
-      image(carImg, partA.x - 75, partA.y - 75, 150, 150); // 左邊肩膀
-      image(carImg, partB.x - 75, partB.y - 75, 150, 150); // 右邊肩膀
+      image(carImg, imgXLeft - 75, partA.y - 75, 150, 150); // 左邊肩膀
+      image(carImg, imgXRight - 75, partB.y - 75, 150, 150); // 右邊肩膀
       pop();
     }
     // hip to hip
@@ -147,5 +151,3 @@ function drawSkeleton() {
   15 left foot
   16 right foot
 */
-
-
